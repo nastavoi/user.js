@@ -1,6 +1,10 @@
 /*** MY OVERRIDES ***/
 user_pref("_user.js.parrot", "overrides section syntax error");
 
+/* 2802: enable Firefox to clear items on shutdown (see 2803)
+ * [SETTING] Privacy & Security>History>Custom Settings>Clear history when Firefox closes ***/
+user_pref("privacy.sanitize.sanitizeOnShutdown", false);
+
 /* override recipe: enable session restore ***/
 user_pref("browser.startup.page", 3); // 0102
   // user_pref("browser.privatebrowsing.autostart", false); // 0110 required if you had it set as true
@@ -33,11 +37,20 @@ user_pref("browser.sessionstore.interval", 15000);
  * 0=desktop, 1=downloads (default), 2=last used
  * [SETTING] To set your default "downloads": General>Downloads>Save files to ***/
 user_pref("browser.download.folderList", 0);
+
 /* 2652: disable adding downloads to the system's "recent documents" list ***/
 user_pref("browser.download.manager.addToRecentDocs", true);
 
-/* 2802: enable Firefox to clear items on shutdown (see 2803)
- * [SETTING] Privacy & Security>History>Custom Settings>Clear history when Firefox closes ***/
-user_pref("privacy.sanitize.sanitizeOnShutdown", false);
+/* 0412: disable SB checks for downloads (remote)
+ * To verify the safety of certain executable files, Firefox may submit some information about the
+ * file, including the name, origin, size and a cryptographic hash of the contents, to the Google
+ * Safe Browsing service which helps Firefox determine whether or not the file should be blocked
+ * [SETUP-SECURITY] If you do not understand this, or you want this protection, then override it ***/
+  // user_pref("browser.safebrowsing.downloads.remote.enabled", false);
+  // user_pref("browser.safebrowsing.downloads.remote.url", "");
+/* 0413: disable SB checks for unwanted software
+ * [SETTING] Privacy & Security>Security>... "Warn you about unwanted and uncommon software" ***/
+user_pref("browser.safebrowsing.downloads.remote.block_potentially_unwanted", true);
+user_pref("browser.safebrowsing.downloads.remote.block_uncommon", true);
 
 user_pref("_user.js.parrot", "overrides section successful");
