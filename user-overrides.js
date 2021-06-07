@@ -113,15 +113,17 @@ user_pref("dom.push.enabled", true);
  * [SETTING] to manage site exceptions: Options>Privacy & Security>Permissions>Notifications>Settings ***/
 user_pref("permissions.default.desktop-notification", 0);
 
+/* override recipe: FF87+ use ETP Strict mode ***/
+user_pref("privacy.firstparty.isolate", false); // 4001
+user_pref("network.cookie.cookieBehavior", 5); // 2701
+user_pref("browser.contentblocking.category", "strict"); // 2701
+  // user_pref("privacy.trackingprotection.enabled", true); // 2710 user.js default
+  // user_pref("privacy.trackingprotection.socialtracking.enabled", true); // 2711 user.js default
+
 /* 2740: disable service worker cache and cache storage
  * [NOTE] We clear service worker cache on exiting Firefox (see 2803)
  * [1] https://w3c.github.io/ServiceWorker/#privacy ***/
 user_pref("dom.caches.enabled", true);
-
-/* 4001: enable First Party Isolation [FF51+]
- * [SETUP-WEB] May break cross-domain logins and site functionality until perfected
- * [1] https://bugzilla.mozilla.org/buglist.cgi?bug_id=1260931,1299996 ***/
-user_pref("privacy.firstparty.isolate", false);
 
 /* 4501: enable privacy.resistFingerprinting [FF41+]
  * This pref is the master switch for all other privacy.resist* prefs unless stated
